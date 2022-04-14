@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<script>
+	function text_pub(){
+		//alert('fasf');
+		//var item = $('#item').val();
+		//var name = $('#name').val();
+        var input_array = new Array(40);
+        var select_array = new Array(40);
+		var single_num = $('#txt_1').val();
+		var double_num = $('#txt_2').val();
+        var dv = document.querySelector('#single_set').childNodes.length;
+        var dw = document.querySelector('#single_set').childNodes[3].nodeName;
+        var  input_count = 0;
+        var  select_count = 0;
+
+        console.log(dv);
+        // console.log(dw);
+        // console.log(document.querySelector('#single_set div input').value);
+		for(var i =0;i<dv;i++)
+		{
+            if( document.querySelector('#single_set').childNodes[i].nodeName == "DIV"){
+                var inpurt_val = document.querySelector('#single_set').childNodes[i].childNodes[2].value;
+                var select_val = document.querySelector('#single_set').childNodes[i].childNodes[3].value;
+                input_array[input_count] = inpurt_val;
+                select_array[input_count] = select_val;
+                // console.log(inpurt_val);
+                // console.log(select_val);
+                input_count ++;
+               
+            }
+
+		    //console.log(document.querySelector('.plc_area #single_set input').value);
+		}
+        console.log(input_array );
+        console.log(select_array );
+		$.ajax({
+				type: 'POST',
+				url: " http://localhost:5000/FX5U_SQL" ,
+				contentType: "application/json;charset=UTF-8",
+				data: JSON.stringify(
+				{
+				"cs":input_array[0]+','+input_array[1]+','+input_array[2],
+				"items":"0979319516"
+				}
+			),
+		dataType: 'json',
+
+			success: function(data){
+			 // console.log('ajax result:')
+			  console.log(data[0].D810)
+			}
+
+		});
+	}
+    var sin_count = 0;
+    var dou_count = 0;
+	function add_sin()
+	{
+        sin_count ++;
+        var panel1 = document.createElement('div');
+        var texts = document.createElement('input');
+        var pxt = document.createElement('p');
+        var select_box = document.createElement('select');
+        var select_val = document.createElement('option');
+        select_val.value = "D";
+        select_val.text = "D";
+        select_box.add(select_val);
+        select_val = document.createElement('option');
+        select_val.value = "M";
+        select_val.text = "M";
+        select_box.add(select_val);
+        select_val = document.createElement('option');
+        select_val.value = "X";
+        select_val.text = "X";
+        select_box.add(select_val);
+
+        pxt.id = "Single";
+        pxt.style.display = "inline";
+        pxt.innerHTML = "Single位址 : ";
+        panel1.appendChild(document.createElement('br'));
+        panel1.appendChild(pxt);
+        panel1.appendChild(texts);
+        panel1.appendChild(select_box);
+        panel1.id = 'panel_sin'+sin_count;
+        // document.querySelector('.plc_area #single_set').appendChild( document.createElement('br'));
+        // document.querySelector('.plc_area #single_set').appendChild(pxt);
+        // document.querySelector('.plc_area #single_set').appendChild(texts);
+        // document.querySelector('.plc_area #single_set').appendChild(select_box);
+        document.querySelector('.plc_area #single_set').appendChild(panel1);
+        document.getElementById('txt_1').value = sin_count;
+	    console.log(document.querySelector('.plc_area'));
+        
+	}
+
+	function add_dou()
+	{
+        dou_count ++;
+        var panel1 = document.createElement('div');
+        var texts = document.createElement('input');
+        var pxt = document.createElement('p');
+        var select_box = document.createElement('select');
+        var select_val = document.createElement('option');
+        select_val.value = "D";
+        select_val.text = "D";
+        select_box.add(select_val);
+        select_val = document.createElement('option');
+        select_val.value = "M";
+        select_val.text = "M";
+        select_box.add(select_val);
+        select_val = document.createElement('option');
+        select_val.value = "X";
+        select_val.text = "X";
+        select_box.add(select_val);
+
+        pxt.id = "Single";
+        pxt.style.display = "inline";
+        pxt.innerHTML = "Double位址 : ";
+        panel1.appendChild(document.createElement('br'));
+        panel1.appendChild(pxt);
+        panel1.appendChild(texts);
+        panel1.appendChild(select_box);
+        panel1.id = 'panel_dou'+dou_count;
+        //document.querySelector('.plc_area #double_set').appendChild( document.createElement('br'));
+        //document.querySelector('.plc_area #double_set').appendChild(pxt);
+        //document.querySelector('.plc_area #double_set').appendChild(texts);
+        //document.querySelector('.plc_area #double_set').appendChild(select_box);
+        document.querySelector('.plc_area #double_set').appendChild(panel1);
+        document.getElementById('txt_2').value = dou_count;
+        
+
+	}
+</script>
+
+
+</head>
+<body>
+    <div class="plc_area">
+
+       Single數量&nbsp;&nbsp; :&nbsp; <input id="txt_1"  /><button id="add_single" onclick="add_sin()">+</button><br/>
+       Double數量 :&nbsp;&nbsp;<input id="txt_2"  /><button id="add_double" onclick="add_dou()">+</button>
+        <div id="single_set">
+            Single位址<br>
+        </div>
+        <br/>
+        <div id="double_set">
+            Double位址<br>
+        </div>
+
+    </div>
+    <button onclick="text_pub()">點擊</button>
+
+
+</body>
+</html>
