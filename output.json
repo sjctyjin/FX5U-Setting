@@ -1,0 +1,22 @@
+[
+    {
+        "IP_address": "192.168.3.235",
+        "single_num": "2",
+        "single_address": [
+            "12:D",
+            "24:D"
+        ],
+        "double_num": "0",
+        "double_address": []
+    },
+    {
+        "IP_address": "192.168.3.236",
+        "single_num": "2",
+        "single_address": [
+            "21:D",
+            "14:D"
+        ],
+        "double_num": "0",
+        "double_address": []
+    }
+]

@@ -4,63 +4,188 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+
+    <style>
+        html.body{
+            padding: 0px;
+            height: 100%;
+            margin: 0px;
+        }
+        .plc_area_1{
+            position: relative;
+            left: 0%;
+            width: 25%;
+            height: 80vh;
+            overflow: scroll;
+
+            /* background-image: url(static/add.png); */
+            /* background-size:30%;
+            background-attachment: scroll;
+            background-repeat: no-repeat;
+            background-position:center; */
+        }
+    </style>
 <script>
-	function text_pub(){
-		//alert('fasf');
-		//var item = $('#item').val();
-		//var name = $('#name').val();
-        var input_array = new Array(40);
-        var select_array = new Array(40);
-		var single_num = $('#txt_1').val();
-		var double_num = $('#txt_2').val();
-        var dv = document.querySelector('#single_set').childNodes.length;
-        var dw = document.querySelector('#single_set').childNodes[3].nodeName;
-        var  input_count = 0;
-        var  select_count = 0;
 
-        console.log(dv);
-        // console.log(dw);
-        // console.log(document.querySelector('#single_set div input').value);
-		for(var i =0;i<dv;i++)
-		{
-            if( document.querySelector('#single_set').childNodes[i].nodeName == "DIV"){
-                var inpurt_val = document.querySelector('#single_set').childNodes[i].childNodes[2].value;
-                var select_val = document.querySelector('#single_set').childNodes[i].childNodes[3].value;
-                input_array[input_count] = inpurt_val;
-                select_array[input_count] = select_val;
-                // console.log(inpurt_val);
-                // console.log(select_val);
-                input_count ++;
-               
+    function onloadeve(){
+        var class_div3 = 0;
+        var class_div4 = 0;
+
+        var plc_num_json = new Array(4);
+        var class_div = document.getElementsByClassName('plc_area_1').length;
+        for(var divnum = 0;divnum < class_div;divnum++){
+            var divincon = document.getElementsByClassName('plc_area_1')[divnum];
+            if(divincon.childNodes.length < 5){
+                divincon.style.background = "url(static/add.png)";
+                divincon.style.backgroundSize = "30%";
+                divincon.style.backgroundAttachment = "scroll";
+                divincon.style.backgroundRepeat ="no-repeat";
+                divincon.style.backgroundPosition = "center"
+                
+
+
+            }else{
+                divincon.style.background = (0,142,23);
             }
+           
+            //console.log(divincon.style);
+            
+        }
 
-		    //console.log(document.querySelector('.plc_area #single_set input').value);
-		}
-        console.log(input_array );
-        console.log(select_array );
-		$.ajax({
-				type: 'POST',
-				url: " http://localhost:5000/FX5U_SQL" ,
-				contentType: "application/json;charset=UTF-8",
-				data: JSON.stringify(
-				{
-				"cs":input_array[0]+','+input_array[1]+','+input_array[2],
-				"items":"0979319516"
-				}
-			),
-		dataType: 'json',
+        document.getElementsByClassName('plc_area_1')[2].addEventListener("click",function(e){
+            if(class_div3 == 0){
+                var d = document.getElementsByClassName('plc_area_1')[0].cloneNode(true);
+                this.appendChild(d);
+                class_div3 = 1;
+                this.style.background = null;
+            }                   
+            
+        })
+        document.getElementsByClassName('plc_area_1')[3].addEventListener("click",function(e){       
+            if(class_div4 == 0){           
+                var d = document.getElementsByClassName('plc_area_1')[0].cloneNode(true);
+                this.appendChild(d);
+                class_div4 = 1;
+                this.style.background = null;
+            }
+        })
+    }
 
-			success: function(data){
-			 // console.log('ajax result:')
-			  console.log(data[0].D810)
-			}
+    
+	function text_pub(){
+		var plc_num_json = new Array(4);
+        //plc_num_json.filter()
+        //var FX5U_address = document.querySelector('.plc_area_1 #plc_address').value;
+        var class_div = document.getElementsByClassName('plc_area_1').length;//使用plc_area_1 class的數量
 
-		});
+        for(var divnum = 0;divnum < class_div;divnum++){
+            if(document.getElementById(document.getElementsByClassName('plc_area_1')[divnum].id).childNodes.length > 5)
+            {
+                var FX5U_address = document.getElementById(document.getElementsByClassName('plc_area_1')[divnum].id).querySelector('#plc_address').value;
+                if(FX5U_address == ''){
+                    return alert('請填入PLC IP位址');
+                }
+                var single_num =document.getElementById(document.getElementsByClassName('plc_area_1')[divnum].id).querySelector('#txt_1').value;
+                var double_num = document.getElementById(document.getElementsByClassName('plc_area_1')[divnum].id).querySelector('#txt_2').value;
+                //var single_node_num = document.querySelector('.plc_area_1 #single_set').childNodes.length;
+                //var double_node_num = document.querySelector('.plc_area_1 #double_set').childNodes.length;
+                var single_node_num = document.getElementById(document.getElementsByClassName('plc_area_1')[divnum].id).querySelector('#single_set').childNodes;
+                var double_node_num = document.getElementById(document.getElementsByClassName('plc_area_1')[divnum].id).querySelector('#double_set').childNodes;
+                //var single_text = document.querySelector('#single_set').childNodes[3].nodeName;
+                var single_input_array = new Array(single_node_num.length);
+                var double_input_array = new Array(double_node_num.length);
+                var  single_input_count = 0;
+                var  double_input_count = 0;
+
+                for(var i =0;i<single_node_num.length;i++)
+                {
+                    if( single_node_num[i].nodeName == "DIV"){
+                        var input_val = single_node_num[i].childNodes[2].value;
+                        var select_val = single_node_num[i].childNodes[3].value;
+                        single_input_array[single_input_count] = input_val+':'+select_val;
+                        single_input_count ++;
+                    
+                    }
+                }
+                for(var i =0;i<double_node_num.length;i++)
+                {
+                    if( double_node_num[i].nodeName == "DIV"){
+                        var input_val = double_node_num[i].childNodes[2].value;
+                        var select_val = double_node_num[i].childNodes[3].value;
+                        double_input_array[double_input_count] = input_val+':'+select_val;
+                        double_input_count ++;
+                    
+                    }
+                }
+
+
+                $.ajax({
+             
+                    type: 'POST',
+                    url: " http://localhost:5000/FX5U_SQL" ,
+                    contentType: "application/json;charset=UTF-8",
+                    data: 
+                        JSON.stringify(
+                            {      
+                                
+                            "IP_address" : ''+FX5U_address+'',
+                            "single_num":single_num,
+                            "single_address":single_input_array.filter(d => d),
+                            "double_num":double_num,
+                            "double_address":double_input_array.filter(d => d),
+
+                            }
+                        ),
+                    dataType: 'json',
+
+                    success: function(data){
+                    // console.log('ajax result:')
+                    console.log(data)
+                    //console.log(plc_num_json.filter(d =>d));
+                    }
+
+                });
+                   
+
+                
+            
+            }
+          
+        } 
+
+		// for(var i =0;i<single_node_num;i++)
+		// {
+        //     if( document.querySelector('.plc_area_1 #single_set').childNodes[i].nodeName == "DIV"){
+        //         var input_val = document.querySelector('#single_set').childNodes[i].childNodes[2].value;
+        //         var select_val = document.querySelector('#single_set').childNodes[i].childNodes[3].value;
+        //         single_input_array[single_input_count] = input_val+':'+select_val;
+        //         single_input_count ++;
+               
+        //     }
+
+		    
+		// }
+        // for(var i =0;i<double_node_num;i++)
+		// {
+        //     if( document.querySelector('.plc_area_1 #double_set').childNodes[i].nodeName == "DIV"){
+        //         var input_val = document.querySelector('.plc_area_1 #double_set').childNodes[i].childNodes[2].value;
+        //         var select_val = document.querySelector('.plc_area_1 #double_set').childNodes[i].childNodes[3].value;
+        //         double_input_array[double_input_count] = input_val+':'+select_val;
+        //         double_input_count ++;
+               
+        //     }
+
+		    
+		// }
+        // console.log(input_array );
+        // console.log(select_array );
 	}
     var sin_count = 0;
     var dou_count = 0;
-	function add_sin()
+	function add_sin(e)
 	{
+        console.log(e.parentElement.getAttribute('id'));
+        sin_count  = e.parentElement.querySelector('#txt_1').value;
         sin_count ++;
         var panel1 = document.createElement('div');
         var texts = document.createElement('input');
@@ -91,14 +216,17 @@
         // document.querySelector('.plc_area #single_set').appendChild(pxt);
         // document.querySelector('.plc_area #single_set').appendChild(texts);
         // document.querySelector('.plc_area #single_set').appendChild(select_box);
-        document.querySelector('.plc_area #single_set').appendChild(panel1);
-        document.getElementById('txt_1').value = sin_count;
-	    console.log(document.querySelector('.plc_area'));
+        //document.querySelector('.plc_area_1 #single_set').appendChild(panel1);
+        e.parentElement.querySelector('#single_set').appendChild(panel1);
+        //console.log( e.parentElement.querySelector('#txt_1'));
+        e.parentElement.querySelector('#txt_1').value = sin_count;
+	    //console.log(document.querySelector('.plc_area'));
         
 	}
 
-	function add_dou()
+	function add_dou(e)
 	{
+        dou_count  = e.parentElement.querySelector('#txt_2').value;
         dou_count ++;
         var panel1 = document.createElement('div');
         var texts = document.createElement('input');
@@ -129,8 +257,10 @@
         //document.querySelector('.plc_area #double_set').appendChild(pxt);
         //document.querySelector('.plc_area #double_set').appendChild(texts);
         //document.querySelector('.plc_area #double_set').appendChild(select_box);
-        document.querySelector('.plc_area #double_set').appendChild(panel1);
-        document.getElementById('txt_2').value = dou_count;
+        e.parentElement.querySelector('#double_set').appendChild(panel1);
+        e.parentElement.querySelector('#txt_2').value = dou_count;
+        //document.querySelector('.plc_area_1 #double_set').appendChild(panel1);
+        //document.getElementById('txt_2').value = dou_count;
         
 
 	}
@@ -138,20 +268,47 @@
 
 
 </head>
-<body>
-    <div class="plc_area">
+<body onload="onloadeve()">
+    <div style="display:flex;">
+        <div class="plc_area_1"  id="pl1" style="display:inline;">
+            PLC位址 : <input id="plc_address" name='plc_address' placeholder="192.168.3.250"  /><br/>
+            Single數量&nbsp;&nbsp; :&nbsp; <input id="txt_1" value="0" /><button id="add_single" onclick="add_sin(this)">+</button><br/>
+            Double數量 :&nbsp;&nbsp;<input id="txt_2" value="0" /><button id="add_double" onclick="add_dou(this)">+</button>
+             <div id="single_set">
+                 Single位址<br>
+             </div>
+             <br/>
+             <div id="double_set">
+                 Double位址<br>
+             </div>
+     
+         </div>
+     
+         <div class="plc_area_1" id="pl2" style="display:inline;">
+             PLC位址 : <input id="plc_address" placeholder="192.168.3.250"  ><br/>
+             Single數量&nbsp;&nbsp; :&nbsp; <input id="txt_1" value="0" /><button id="add_single" onclick="add_sin(this)">+</button><br/>
+             Double數量 :&nbsp;&nbsp;<input id="txt_2" value="0" /><button id="add_double" onclick="add_dou(this)">+</button>
+              <div id="single_set">
+                  Single位址<br>
+              </div>
+              <br/>
+              <div id="double_set">
+                  Double位址<br>
+              </div>
+      
+          </div>
 
-       Single數量&nbsp;&nbsp; :&nbsp; <input id="txt_1"  /><button id="add_single" onclick="add_sin()">+</button><br/>
-       Double數量 :&nbsp;&nbsp;<input id="txt_2"  /><button id="add_double" onclick="add_dou()">+</button>
-        <div id="single_set">
-            Single位址<br>
-        </div>
-        <br/>
-        <div id="double_set">
-            Double位址<br>
-        </div>
+          <div class="plc_area_1" id="pl3" style="display:inline;">
+            
+     
+         </div>
 
+         <div class="plc_area_1" id="pl4" style="display:inline;">
+            
+          
+         </div>
     </div>
+    
     <button onclick="text_pub()">點擊</button>
 
 

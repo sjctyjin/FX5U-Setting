@@ -13,10 +13,9 @@
 # app.run(port=5500)
 
 import flask
-# from flask import jsonify,request,render_template
-from flask import Flask, request, abort,jsonify,render_template
 
-# from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, request, abort,jsonify,render_template
+import json
 import datetime
 import time
 from flask_cors import CORS
@@ -44,7 +43,7 @@ app.config["JSON_AS_ASCII"] = False
 #print(Runtime.encode("utf-8").decode('utf-8'))
 
 # test data
-
+PLC_data_list = []
 @app.route('/', methods=['GET'])
 def home():
     # cn = pymssql.connect(server='127.0.0.1', user='sa', password='pass', database='Image_test', charset='big5')
@@ -92,12 +91,31 @@ def test():
         print(traceback.format_exc())
 @app.route('/FX5U_SQL', methods=['POST'])
 def FX5U_POST():
-
+    filepath = "output.json"
     data_res = request.get_json()
-    print(data_res['cs'])
-    cs = [{"D810":data_res['cs'] }]
-    return  jsonify(cs)
 
+
+    cs ={
+        "IP_address":data_res['IP_address'],
+        "single_num":data_res['single_num'],
+        "single_address":data_res['single_address'],
+        "double_num":data_res['double_num'],
+        "double_address":data_res['double_address'],
+    }
+    # print(cs[0])
+
+    PLC_data_list.append(cs)
+    with open("output.json", "w") as f:
+        json.dump(PLC_data_list, f, indent=4)  # indent : 指定縮排長度
+    return  jsonify(PLC_data_list)
+
+
+@app.route('/FX5U_SQL', methods=['GET'])
+def FX5U_GET():
+    # with open('output.json') as f:
+    #     data = json.load(f)
+    # PLC_data_list.append(data)
+    return  jsonify(PLC_data_list)
 
 @app.route('/Hardness', methods=['GET'])
 def Hardness():
