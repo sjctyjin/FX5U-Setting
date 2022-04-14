@@ -44,6 +44,19 @@ app.config["JSON_AS_ASCII"] = False
 
 # test data
 PLC_data_list = []
+with open('output.json') as f:
+    # print(f.read())
+    # value = f.read()
+
+    # print(f.read())
+    # value = f.read()
+    # print("value",value)
+    # print("內如",f)
+    if f.readline() != 'yes':
+        data = json.load(f)
+        PLC_data_list.append(data)
+        print('plc',PLC_data_list)
+
 @app.route('/', methods=['GET'])
 def home():
     # cn = pymssql.connect(server='127.0.0.1', user='sa', password='pass', database='Image_test', charset='big5')
@@ -104,40 +117,32 @@ def FX5U_POST():
     }
     # print(cs[0])
 
-    PLC_data_list.append(cs)
+
     with open("output.json", "w") as f:
-        json.dump(PLC_data_list, f, indent=4)  # indent : 指定縮排長度
+        if f.readline() != '':
+            data = json.load(f)
+            for data_list in data:
+                if(data_list["IP_address"] != cs["IP_address"]):
+                    PLC_data_list.append(cs)
+                    json.dump(PLC_data_list, f, indent=4)  # indent : 指定縮排長度
+        else:
+            PLC_data_list.append(cs)
+            json.dump(PLC_data_list, f, indent=4)  # indent : 指定縮排長度
     return  jsonify(PLC_data_list)
 
 
 @app.route('/FX5U_SQL', methods=['GET'])
 def FX5U_GET():
-    # with open('output.json') as f:
-    #     data = json.load(f)
+    with open('output.json') as f:
+
+        if f.readline() != "":
+            data = json.load(f)
+            for data_list in data:
+                print(data_list['IP_address'])
+
     # PLC_data_list.append(data)
     return  jsonify(PLC_data_list)
 
-@app.route('/Hardness', methods=['GET'])
-def Hardness():
-    global  data_testing
-    # threading.Thread(target=test).start()
-    test()
-    print(data_testing[0])
-    # print(data[2:4])
-    # if data_testing[0] != 0:
-        # D810 = struct.unpack('f', data[32:36])[0]
-        # D812 = struct.unpack('f', data[36:40])[0]
-    D810 = data_testing[0]
-    D812 = data_testing[1]
-    D304 = 0
-    D305 = 0
-    D306 = 0
-
-    cs = [{"D810":round(D810,1),"D812":round(D812,1),"D304":D304,"D305":D305,"D306":D306}]
-        # cs = [{"D810":round(D810,1),"D812":round(D812,1)}]
-    # else: cs = [{"D810":0,"D812":0}]
-
-    return jsonify(cs)
 
 
 if __name__ == "__main__":
