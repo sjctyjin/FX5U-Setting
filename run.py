@@ -1,17 +1,3 @@
-# import flask
-#
-# app = flask.Flask(__name__)
-# app.config["DEBUG"] = True
-#
-#
-# @app.route('/', methods=['GET'])
-# @app.route('/', methods=['POST'])
-# def home():
-#     return "<h1>Hello Flask!</h1><br><h2>你好，Flask</h2>"
-#
-#
-# app.run(port=5500)
-
 import flask
 
 from flask import Flask, request, abort,jsonify,render_template
@@ -43,19 +29,7 @@ app.config["JSON_AS_ASCII"] = False
 #print(Runtime.encode("utf-8").decode('utf-8'))
 
 # test data
-PLC_data_list = []
-with open('output.json') as f:
-    # print(f.read())
-    # value = f.read()
 
-    # print(f.read())
-    # value = f.read()
-    # print("value",value)
-    # print("內如",f)
-    if f.readline() != 'yes':
-        data = json.load(f)
-        PLC_data_list.append(data)
-        print('plc',PLC_data_list)
 
 @app.route('/', methods=['GET'])
 def home():
@@ -106,46 +80,44 @@ def test():
 def FX5U_POST():
     filepath = "output.json"
     data_res = request.get_json()
+    print(data_res)
 
-
-    cs ={
-        "IP_address":data_res['IP_address'],
-        "single_num":data_res['single_num'],
-        "single_address":data_res['single_address'],
-        "double_num":data_res['double_num'],
-        "double_address":data_res['double_address'],
-    }
-    # print(cs[0])
-
-
+    # cs ={
+    #     "IP_address":data_res['IP_address'],
+    #     "single_num":data_res['single_num'],
+    #     "single_address":data_res['single_address'],
+    #     "double_num":data_res['double_num'],
+    #     "double_address":data_res['double_address'],
+    # }
+    # # print(cs[0])
+    PLC_data_list = []
+    #
     with open("output.json", "w") as f:
-        if f.readline() != '':
-            data = json.load(f)
-            for data_list in data:
-                if(data_list["IP_address"] != cs["IP_address"]):
-                    PLC_data_list.append(cs)
-                    json.dump(PLC_data_list, f, indent=4)  # indent : 指定縮排長度
-        else:
-            PLC_data_list.append(cs)
-            json.dump(PLC_data_list, f, indent=4)  # indent : 指定縮排長度
-    return  jsonify(PLC_data_list)
+        # PLC_data_list.append(data_res)
+        json.dump(data_res, f, indent=4)  # indent : 指定縮排長度
+
+    return  jsonify(data_res)
+    # return  "123"
 
 
 @app.route('/FX5U_SQL', methods=['GET'])
 def FX5U_GET():
-    with open('output.json') as f:
-
-        if f.readline() != "":
+    try:
+        with open('output.json','r') as f:
+            PLC_data_list = []
             data = json.load(f)
-            for data_list in data:
-                print(data_list['IP_address'])
+            PLC_data_list.append(data)
+        return jsonify(PLC_data_list)
+
+    except:
+        return "None"
+
 
     # PLC_data_list.append(data)
-    return  jsonify(PLC_data_list)
+
 
 
 
 if __name__ == "__main__":
 
     app.run(host='0.0.0.0',port=5000,debug=True)
-
