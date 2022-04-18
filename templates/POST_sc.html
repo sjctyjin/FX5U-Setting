@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="static/jquery-3.4.1.min.js"></script>
 
     <style>
         html.body{
@@ -25,14 +25,17 @@
             background-position:center; */
         }
     </style>
-
+<script>
+    const local_ip = "{{title}}";
+</script>
 <script src="static/plc_event.js"></script>
 
 </head>
-<body onload="onloadeve()">
+<body>
+
     <div style="display:flex;">
         <div class="plc_area_1"  id="pl1" style="display:inline;">
-            PLC位址 : <input id="plc_address" name='plc_address' placeholder="192.168.3.250"  /><br/>
+            PLC位址 : <input id="plc_address" name='plc_address' placeholder="192.168.3.250" value="123"  /><br/>
             Single數量&nbsp;&nbsp; :&nbsp; <input id="txt_1" value="0" /><button id="add_single" onclick="add_sin(this)">+</button><br/>
             Double數量 :&nbsp;&nbsp;<input id="txt_2" value="0" /><button id="add_double" onclick="add_dou(this)">+</button>
              <div id="single_set">

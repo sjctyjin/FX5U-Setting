@@ -30,9 +30,9 @@ app.config["JSON_AS_ASCII"] = False
 
 # test data
 
-
 @app.route('/', methods=['GET'])
 def home():
+    # print(socket.gethostbyname(socket.gethostname()))
     # cn = pymssql.connect(server='127.0.0.1', user='sa', password='pass', database='Image_test', charset='big5')
     # cursor = cn.cursor(as_dict=True)
     # cursor.execute("SELECT * FROM MES005")
@@ -40,7 +40,11 @@ def home():
     # for data in data_list:
     #     cs = {"s":data["F14"]}
     # return f"<h1>{time.strftime('%Y/%m/%d %H:%M:%S')}</h1>"
-    return render_template('POST_sc.html')
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(('8.8.8.8', 80))
+    ip = s.getsockname()[0]
+    return render_template(f'POST_sc.html',title=ip)
 @app.route('/psa', methods=['GET'])
 def psa():
     # cn = pymssql.connect(server='127.0.0.1', user='sa', password='pass', database='Image_test', charset='big5')

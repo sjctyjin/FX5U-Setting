@@ -1,13 +1,11 @@
 
 
-    function onloadeve(){
+    $(document).ready(function(){
         var class_div2 = 0;
         var class_div3 = 0;
         var class_div4 = 0;
 
-        
-
-        $.get("http://localhost:5000/FX5U_SQL ", function (data) {
+        $.get("http://"+local_ip+":5000/FX5U_SQL", function (data) {
             if(data != 'None'){
                 if(data[0].PLC2[0].IP_address != "undefined"){
                     class_div2 = 1;
@@ -166,7 +164,7 @@
            
            // console.log(document.getElementsByClassName('plc_area_1')[1].querySelector('#add_single'));
 
-        });
+        })
 
 
        
@@ -233,7 +231,7 @@
                 this.style.background = null;
             }
         })
-    }
+    });
 
     
 	function text_pub(){
@@ -307,7 +305,7 @@
         $.ajax({
              
             type: 'POST',
-            url: " http://localhost:5000/FX5U_SQL" ,
+            url: " http://"+local_ip+":5000/FX5U_SQL" ,
             contentType: "application/json;charset=UTF-8",
             data: 
                 JSON.stringify(
