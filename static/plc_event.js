@@ -1,5 +1,4 @@
-
-  var class_div2 = 0;
+ var class_div2 = 0;
   var class_div3 = 0;
   var class_div4 = 0;
 
@@ -7,7 +6,7 @@
       
         $.get("http://"+local_ip+":5000/FX5U_SQL", function (data) {
             if(data != 'None'){
-                if(data[0].PLC2[0].IP_address != "undefined"){
+                if(data[0].PLC1[0].IP_address != "undefined"){
                     class_div2 = 1;
                     var div1 = document.getElementsByClassName('plc_area_1')[1];
                     div1.style.background = null;
@@ -17,6 +16,45 @@
                         div1.appendChild(d.childNodes[lend].cloneNode(true));
                     }
                     //在div內容都生成完成後，在餵入資料
+
+                    //=============================================================     Ajax 資料內容    ======================================
+                    var jaon_data =  data[0].PLC1[0];
+                    div1.querySelector('#plc_address').value = jaon_data.IP_address;
+                    //1.先生成jSON格式中 Single數量
+                    for(var single = 0;single <jaon_data.single_num;single++ ){
+                        div1.querySelector('#add_single').click();
+                    }
+                    //2.生成jSON格式中 Double數量
+                    for(var single = 0;single <jaon_data.double_num;single++ ){
+                        div1.querySelector('#add_double').click();
+                    }
+                    //3.將jSON格式中的Single位址UPDATE上去
+                    for(var single =0;single <jaon_data.single_num;single++ ){
+                        var div_single_set =div1.querySelector('#single_set').querySelector('#panel_sin'+(single+1));
+                        div_single_set.querySelector('input').value= jaon_data.single_address[single].split(":")[0];
+                        div_single_set.querySelector('select').value = jaon_data.single_address[single].split(":")[1];
+                        console.log( div_single_set.querySelector('select').value);
+                        
+                    }
+                    //4.將jSON格式中的Double位址UPDATE上去
+                    for(var double =0;double <jaon_data.double_num;double++ ){
+                        var div_double_set = div1.querySelector('#double_set').querySelector('#panel_dou'+(double+1));
+                        div_double_set.querySelector('input').value= jaon_data.double_address[double].split(":")[0];
+                        div_double_set.querySelector('select').value = jaon_data.double_address[double].split(":")[1];
+                        console.log( div_double_set.querySelector('select').value);
+                        
+                    } 
+                }
+                if(data[0].PLC2[0].IP_address != "undefined"){
+                    class_div3 = 1;
+                    var div1 = document.getElementsByClassName('plc_area_1')[2];
+                    div1.style.background = null;
+                    var d = document.getElementsByClassName('plc_area_1')[0].cloneNode(true);
+
+                    for(var lend = 0;lend<d.childNodes.length;lend ++){
+                        //在div中生成元素
+                        div1.appendChild(d.childNodes[lend].cloneNode(true));
+                    }
 
                     //=============================================================     Ajax 資料內容    ======================================
                     var jaon_data =  data[0].PLC2[0];
@@ -47,11 +85,10 @@
                     } 
                 }
                 if(data[0].PLC3[0].IP_address != "undefined"){
-                    class_div3 = 1;
-                    var div1 = document.getElementsByClassName('plc_area_1')[2];
+                    class_div4 = 1;
+                    var div1 = document.getElementsByClassName('plc_area_1')[3];
                     div1.style.background = null;
                     var d = document.getElementsByClassName('plc_area_1')[0].cloneNode(true);
-
                     for(var lend = 0;lend<d.childNodes.length;lend ++){
                         //在div中生成元素
                         div1.appendChild(d.childNodes[lend].cloneNode(true));
@@ -84,49 +121,11 @@
                         console.log( div_double_set.querySelector('select').value);
                         
                     } 
-                }
-                if(data[0].PLC4[0].IP_address != "undefined"){
-                    class_div4 = 1;
-                    var div1 = document.getElementsByClassName('plc_area_1')[3];
-                    div1.style.background = null;
-                    var d = document.getElementsByClassName('plc_area_1')[0].cloneNode(true);
-                    for(var lend = 0;lend<d.childNodes.length;lend ++){
-                        //在div中生成元素
-                        div1.appendChild(d.childNodes[lend].cloneNode(true));
-                    }
-
-                    //=============================================================     Ajax 資料內容    ======================================
-                    var jaon_data =  data[0].PLC4[0];
-                    div1.querySelector('#plc_address').value = jaon_data.IP_address;
-                    //1.先生成jSON格式中 Single數量
-                    for(var single = 0;single <jaon_data.single_num;single++ ){
-                        div1.querySelector('#add_single').click();
-                    }
-                    //2.生成jSON格式中 Double數量
-                    for(var single = 0;single <jaon_data.double_num;single++ ){
-                        div1.querySelector('#add_double').click();
-                    }
-                    //3.將jSON格式中的Single位址UPDATE上去
-                    for(var single =0;single <jaon_data.single_num;single++ ){
-                        var div_single_set =div1.querySelector('#single_set').querySelector('#panel_sin'+(single+1));
-                        div_single_set.querySelector('input').value= jaon_data.single_address[single].split(":")[0];
-                        div_single_set.querySelector('select').value = jaon_data.single_address[single].split(":")[1];
-                        console.log( div_single_set.querySelector('select').value);
-                        
-                    }
-                    //4.將jSON格式中的Double位址UPDATE上去
-                    for(var double =0;double <jaon_data.double_num;double++ ){
-                        var div_double_set = div1.querySelector('#double_set').querySelector('#panel_dou'+(double+1));
-                        div_double_set.querySelector('input').value= jaon_data.double_address[double].split(":")[0];
-                        div_double_set.querySelector('select').value = jaon_data.double_address[double].split(":")[1];
-                        console.log( div_double_set.querySelector('select').value);
-                        
-                    } 
 
                 }
 
-                if(data[0].PLC1[0].IP_address != "undefined"){
-                    var jaon_data =  data[0].PLC1[0];
+                if(data[0].PLC0[0].IP_address != "undefined"){
+                    var jaon_data =  data[0].PLC0[0];
                     document.getElementsByClassName('plc_area_1')[0].querySelector('#plc_address').value = data[0].PLC1[0].IP_address;
                     //1.先生成jSON格式中 Single數量
                     for(var single = 0;single <jaon_data.single_num;single++ ){
@@ -310,7 +309,7 @@
             data: 
                 JSON.stringify(
                     {      
-                        "PLC1":[ 
+                        "PLC0":[
                             {
                                 "IP_address" : ''+FX5U_address_array[0]+'',
                                 "single_num":single_num_array[0],
@@ -319,7 +318,7 @@
                                 "double_address":double_input_array_2[0],
                             }
                         ],
-                        "PLC2":[ 
+                        "PLC1":[
                             {
                                 "IP_address" : ''+FX5U_address_array[1]+'',
                                 "single_num":single_num_array[1],
@@ -328,7 +327,7 @@
                                 "double_address":double_input_array_2[1],
                             }
                         ],
-                        "PLC3":[ 
+                        "PLC2":[
                             {
                                 "IP_address" : ''+FX5U_address_array[2]+'',
                                 "single_num":single_num_array[2],
@@ -337,7 +336,7 @@
                                 "double_address":double_input_array_2[2],
                             }
                         ],
-                        "PLC4":[ 
+                        "PLC3":[
                             {
                                 "IP_address" : ''+FX5U_address_array[3]+'',
                                 "single_num":single_num_array[3],
@@ -375,14 +374,15 @@
         var select_box = document.createElement('select');
         var select_val = document.createElement('option');
         var btn_delete = document.createElement('button');
-
-        select_val.value = "M";
-        select_val.text = "M";
-        select_box.add(select_val);
-        select_val = document.createElement('option');
         select_val.value = "D";
         select_val.text = "D";
         select_box.add(select_val);
+
+        select_val = document.createElement('option');
+        select_val.value = "M";
+        select_val.text = "M";
+        select_box.add(select_val);
+
         
         select_val = document.createElement('option');
         select_val.value = "X";
@@ -438,15 +438,16 @@
         var select_box = document.createElement('select');
         var select_val = document.createElement('option');
         var btn_delete = document.createElement('button');
+        select_val.value = "D";
+        select_val.text = "D";
+        select_box.add(select_val);
 
+
+        select_val = document.createElement('option');
         select_val.value = "M";
         select_val.text = "M";
         select_box.add(select_val);
 
-        select_val = document.createElement('option');
-        select_val.value = "D";
-        select_val.text = "D";
-        select_box.add(select_val);
   
         select_val = document.createElement('option');
         select_val.value = "X";
@@ -571,5 +572,3 @@
 
 
     }
-
-
