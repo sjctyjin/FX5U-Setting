@@ -33,7 +33,7 @@
                         var div_single_set =div1.querySelector('#single_set').querySelector('#panel_sin'+(single+1));
                         div_single_set.querySelector('input').value= jaon_data.single_address[single].split(":")[0];
                         div_single_set.querySelector('select').value = jaon_data.single_address[single].split(":")[1];
-                        console.log( div_single_set.querySelector('select').value);
+                        //console.log( div_single_set.querySelector('select').value);
                         
                     }
                     //4.將jSON格式中的Double位址UPDATE上去
@@ -41,7 +41,17 @@
                         var div_double_set = div1.querySelector('#double_set').querySelector('#panel_dou'+(double+1));
                         div_double_set.querySelector('input').value= jaon_data.double_address[double].split(":")[0];
                         div_double_set.querySelector('select').value = jaon_data.double_address[double].split(":")[1];
-                        console.log( div_double_set.querySelector('select').value);
+                        //取得判斷是否為浮點或Double word
+                        if(jaon_data.double_address[double].split(":")[2] == "F"){
+                            div_double_set.querySelector('.text').innerHTML = "F";
+                            div_double_set.querySelector('.checkbox').checked = false;
+
+                            
+                        }else{
+                            div_double_set.querySelector('.text').innerHTML = "DB";
+                            div_double_set.querySelector('.checkbox').checked = true;
+                        }
+                        //console.log( div_double_set.querySelector('select').value);
                         
                     } 
                 }
@@ -72,7 +82,7 @@
                         var div_single_set =div1.querySelector('#single_set').querySelector('#panel_sin'+(single+1));
                         div_single_set.querySelector('input').value= jaon_data.single_address[single].split(":")[0];
                         div_single_set.querySelector('select').value = jaon_data.single_address[single].split(":")[1];
-                        console.log( div_single_set.querySelector('select').value);
+                        //console.log( div_single_set.querySelector('select').value);
                         
                     }
                     //4.將jSON格式中的Double位址UPDATE上去
@@ -80,7 +90,17 @@
                         var div_double_set = div1.querySelector('#double_set').querySelector('#panel_dou'+(double+1));
                         div_double_set.querySelector('input').value= jaon_data.double_address[double].split(":")[0];
                         div_double_set.querySelector('select').value = jaon_data.double_address[double].split(":")[1];
-                        console.log( div_double_set.querySelector('select').value);
+                        //取得判斷是否為浮點或Double word
+                        if(jaon_data.double_address[double].split(":")[2] == "F"){
+                            div_double_set.querySelector('.text').innerHTML = "F";
+                            div_double_set.querySelector('.checkbox').checked = false;
+
+                            
+                        }else{
+                            div_double_set.querySelector('.text').innerHTML = "DB";
+                            div_double_set.querySelector('.checkbox').checked = true;
+                        }
+                        //console.log( div_double_set.querySelector('select').value);
                         
                     } 
                 }
@@ -110,7 +130,7 @@
                         var div_single_set =div1.querySelector('#single_set').querySelector('#panel_sin'+(single+1));
                         div_single_set.querySelector('input').value= jaon_data.single_address[single].split(":")[0];
                         div_single_set.querySelector('select').value = jaon_data.single_address[single].split(":")[1];
-                        console.log( div_single_set.querySelector('select').value);
+                        //console.log( div_single_set.querySelector('select').value);
                         
                     }
                     //4.將jSON格式中的Double位址UPDATE上去
@@ -118,7 +138,17 @@
                         var div_double_set = div1.querySelector('#double_set').querySelector('#panel_dou'+(double+1));
                         div_double_set.querySelector('input').value= jaon_data.double_address[double].split(":")[0];
                         div_double_set.querySelector('select').value = jaon_data.double_address[double].split(":")[1];
-                        console.log( div_double_set.querySelector('select').value);
+                        //取得判斷是否為浮點或Double word
+                        if(jaon_data.double_address[double].split(":")[2] == "F"){
+                            div_double_set.querySelector('.text').innerHTML = "F";
+                            div_double_set.querySelector('.checkbox').checked = false;
+
+                            
+                        }else{
+                            div_double_set.querySelector('.text').innerHTML = "DB";
+                            div_double_set.querySelector('.checkbox').checked = true;
+                        }
+                        //console.log( div_double_set.querySelector('select').value);
                         
                     } 
 
@@ -126,7 +156,7 @@
 
                 if(data[0].PLC0[0].IP_address != "undefined"){
                     var jaon_data =  data[0].PLC0[0];
-                    document.getElementsByClassName('plc_area_1')[0].querySelector('#plc_address').value = data[0].PLC1[0].IP_address;
+                    document.getElementsByClassName('plc_area_1')[0].querySelector('#plc_address').value = jaon_data.IP_address;
                     //1.先生成jSON格式中 Single數量
                     for(var single = 0;single <jaon_data.single_num;single++ ){
                         document.getElementsByClassName('plc_area_1')[0].querySelector('#add_single').click();
@@ -148,13 +178,18 @@
                         var div_double_set = document.getElementsByClassName('plc_area_1')[0].querySelector('#double_set').querySelector('#panel_dou'+(double+1));
                         div_double_set.querySelector('input').value= jaon_data.double_address[double].split(":")[0];
                         div_double_set.querySelector('select').value = jaon_data.double_address[double].split(":")[1];
-                        console.log( div_double_set.querySelector('select').value);
-                        
+                        //取得判斷是否為浮點或Double word
+                        if(jaon_data.double_address[double].split(":")[2] == "F"){
+                            div_double_set.querySelector('.text').innerHTML = "F";
+                            div_double_set.querySelector('.checkbox').checked = false;
+
+                        }else{
+                            div_double_set.querySelector('.text').innerHTML = "DB";
+                            div_double_set.querySelector('.checkbox').checked = true;
+                        }
+                        //console.log( div_double_set.querySelector('select').value);                      
                     } 
                 }
-
-                
-
             }
 
             // console.log(data[0]['PLC1'][0].IP_address);
@@ -277,9 +312,10 @@
                 for(var i =0;i<double_node_num.length;i++)
                 {
                     if( double_node_num[i].nodeName == "DIV"){
-                        var input_val = double_node_num[i].childNodes[2].value;
-                        var select_val = double_node_num[i].childNodes[3].value;
-                        double_input_array[double_input_count] = input_val+':'+select_val;
+                        var input_val = double_node_num[i].childNodes[2].value;//輸入的PLC暫存器位址
+                        var select_val = double_node_num[i].childNodes[3].value;//判斷是 D 還是 M
+                        var datatype = double_node_num[i].childNodes[5].innerHTML;//判斷是DB (dobule word) 或是 F (浮點數)
+                        double_input_array[double_input_count] = input_val+':'+select_val+':'+datatype;
                         double_input_count ++;
                     
                     }
@@ -438,6 +474,7 @@
         var select_box = document.createElement('select');
         var select_val = document.createElement('option');
         var btn_delete = document.createElement('button');
+        //======================================================
         select_val.value = "D";
         select_val.text = "D";
         select_box.add(select_val);
@@ -457,6 +494,28 @@
         btn_delete.id = "btndelete";
         btn_delete.innerHTML = "刪除";
         btn_delete.style.width = "20%";
+        //================================  Switch切換按鈕   ======================
+        var checkarea = document.createElement('label');
+        var checkbtn = document.createElement('input');
+        var btn_box = document.createElement('span');
+        var btn = document.createElement('span');
+        var text_on_off = document.createElement('span');
+
+        checkbtn.type = 'checkbox';
+        checkbtn.className = 'checkbox';
+
+        btn_box.className = "btn-box";
+        btn.className = "btn";
+        btn_box.appendChild(btn);
+
+        text_on_off.className="text";
+        text_on_off.innerHTML = "F"
+       
+        checkarea.appendChild(checkbtn);
+        checkarea.appendChild(btn_box);
+        //checkarea.appendChild(text_on_off);
+        
+         //================================  輸入至Panel區塊   ======================
 
         pxt.id = "Single";
         pxt.style.display = "inline";
@@ -465,12 +524,26 @@
         panel1.appendChild(pxt);
         panel1.appendChild(texts);
         panel1.appendChild(select_box);
+        panel1.appendChild(checkarea);
+        panel1.appendChild(text_on_off);
         panel1.appendChild(btn_delete);
 
         panel1.id = 'panel_dou'+dou_count;
+        // panel1.style.display = "flex";
         e.parentElement.querySelector('#double_set').appendChild(panel1);
         e.parentElement.querySelector('#txt_2').value = dou_count;
-    btn_delete.addEventListener('click',function(){
+        
+        checkbtn.addEventListener('click',function() {
+            console.log(this.checked);
+        if(this.checked == true){
+            text_on_off.innerHTML="DB"
+        }else{
+            text_on_off.innerHTML="F"
+        }
+        })
+
+
+        btn_delete.addEventListener('click',function(){
            //document.querySelector('#single_set').remove(document.querySelector('#single_set #'+panel1.id))
            //alert(e.parentElement.id);
            
