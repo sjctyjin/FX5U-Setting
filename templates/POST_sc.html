@@ -28,7 +28,7 @@
             height: 80vh;
             overflow: scroll;
             font-size:3vmin;
-            padding:120px;
+            padding:20px;
             background-color: rgba(255,255, 255, 0.8);
             background-blend-mode: multiply;
             /* background-image: url(static/add.png); */
@@ -51,11 +51,58 @@
         }
         #single_set{
             background-color: bisque;
+            width: 100%;
         }
         #double_set{
             background-color: aquamarine ;
+            width: 100%;
         }
 
+/* ==================================================== */
+.btn-box {
+    position: relative;
+  display:block;
+    top:10px;
+    left: 20px;
+  width: 40px;
+  height: 25px;
+  border-radius:100px;
+  background-color: #ccc;
+  box-shadow: 0px 3px 0px rgba(0,0,0,.13) inset;
+}
+.text{
+    position: relative;
+    left: 35px;
+}
+#btndelete{
+    position: relative;
+    left: 50px;
+}
+.btn-box .btn {
+    position: relative;
+   
+  display:block;
+  width: 10px;
+  height: 25px;
+  border-radius:50%;
+  background-color: #fff;
+  margin-left: 0;/*動畫從ml為0開始*/
+  transition: .5s;
+  box-shadow:1px 2px 5px rgba(0,0,0,.3);
+}
+.checkbox {
+  position:absolute;
+  opacity:0;
+}
+.checkbox:checked + .btn-box {
+  background-color: #8f8;
+}
+.checkbox:checked + .btn-box .btn {
+  margin-left: 20px;
+
+}
+
+        
 
     </style>
 <script>
@@ -70,7 +117,7 @@
         <div class="col-md-5 col-md-offset-1 col-xs-12 plc_area_1"  id="pl1" style="display:inline;">
             PLC位址 : <input id="plc_address" name='plc_address' placeholder="192.168.3.250"  style="width: 50%;" />
             <button onclick="clear_div(this)">清除</button>
-            <button onclick="close_div(this)">清除</button>
+            <button onclick="close_div(this)">刪除</button>
             <br/>
             Single數量&nbsp;&nbsp; :&nbsp; <input id="txt_1" value="0" /><button id="add_single" onclick="add_sin(this)">+</button><br/>
             Double數量 :&nbsp;&nbsp;<input id="txt_2" value="0" /><button id="add_double" onclick="add_dou(this)">+</button>
