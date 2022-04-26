@@ -12,12 +12,12 @@ import pymssql
 import traceback
 import datetime
 
-PLC = [('10.1.52.70', 1025),
-       ('10.1.52.72', 1025),
-       ('10.1.52.74', 1025)]
-##PLC=[('192.168.3.250',1025),
-##     ('10.1.52.72',1025),
-##     ('10.1.52.74',1025)]
+# PLC = [('10.1.52.70', 1025),
+#        ('10.1.52.72', 1025),
+#        ('10.1.52.74', 1025)]
+PLC=[('192.168.3.250',1025),
+    ('10.1.52.72',1025),
+    ('10.1.52.74',1025)]
 Machine_Number = ['P101', 'P102', 'P103']
 Machine_Status = ['', '', '']
 Runtime = [0, 0, 0]
@@ -59,21 +59,21 @@ SLMP = [
     0x00, 0x00,  # Monitoring timer (9,10)
     0x03, 0x04,  # Command (11,12)
     0x00, 0x00,  # Subcommand (13,14)
-    0x02,  # Word access points
-    0x06,  # Double-word access points
+    0x00,  # Word access points
+    0x01,  # Double-word access points
 
     # Word
-    0x00, 0x00, 0x00, 0x90,  # M0~M15
-    0x30, 0x01, 0x00, 0xA8,  # D304(每分鐘數量)
+    # 0x00, 0x00, 0x00, 0x90,  # M0~M15
+    # 0x30, 0x01, 0x00, 0xA8,  # D304(每分鐘數量)
 
     # Double Word
     # 0x24,0x03,0x00,0xA8,    #D804(紙片數量)
-    0x54, 0x01, 0x00, 0xA8,  # D340(紙片數量)
-    0x20, 0x00, 0x00, 0x9C,  # X40~X70
-    0x7B, 0x00, 0x00, 0x90,  # M123~M154
-    0x83, 0x03, 0x00, 0x90,  # M899~M930
-    0xB4, 0x03, 0x00, 0x90,  # M948~M979
-    0x28, 0x03, 0x00, 0xA8,  # D808(不合格數量)
+    0x5e, 0x01, 0x00, 0xA8,  # D340(紙片數量)
+    # 0x20, 0x00, 0x00, 0x9C,  # X40~X70
+    # 0x7B, 0x00, 0x00, 0x90,  # M123~M154
+    # 0x83, 0x03, 0x00, 0x90,  # M899~M930
+    # 0xB4, 0x03, 0x00, 0x90,  # M948~M979
+    # 0x28, 0x03, 0x00, 0xA8,  # D808(不合格數量)
 ]
 
 SLMP[7:9] = struct.pack('H', len(SLMP[9:]))  # Request data length
@@ -283,7 +283,7 @@ def ReadPLC(i):
     # Socket.Timeout
     except:
         # print(f"{PLC[i]}")
-        # print(traceback.format_exc())
+        print(traceback.format_exc())
         Machine_Status[i] = 'N'
         Downtime[i] += 1
 
@@ -412,14 +412,14 @@ def Main():
 
     while True:
 
-        ReadSQL()
+        # ReadSQL()
         if CurrentTime != Now():
             CurrentTime = Now()
 
             ReadPLC(0)
-            ReadPLC(1)
-            ReadPLC(2)
-            WriteSQL()
+            # ReadPLC(1)
+            # ReadPLC(2)
+            # WriteSQL()
 
             time.sleep(0.2)
 

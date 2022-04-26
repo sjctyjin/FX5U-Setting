@@ -12,6 +12,7 @@ import struct
 import socket
 import serial
 import traceback
+import divt_text
 
 pjdir = os.path.abspath(os.path.dirname(__file__))
 
@@ -54,7 +55,11 @@ def psa():
     # for data in data_list:
     #     cs = {"s":data["F14"]}
     # return f"<h1>{time.strftime('%Y/%m/%d %H:%M:%S')}</h1>"
-    return render_template('Electrop_Monitor.html')
+    # return render_template('Electrop_Monitor.html')
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(('8.8.8.8', 80))
+    ip = s.getsockname()[0]
+    return render_template('Show_RealTime.html',title=ip)
 
 def test():
     global data_testing
@@ -119,7 +124,15 @@ def FX5U_GET():
 
     # PLC_data_list.append(data)
 
+@app.route('/RealTime', methods=['GET'])
+def RealTime():
+    try:
+        for k in range(len(divt_text.PLC)):
+            divt_text.ReadPLC(k)
+        return jsonify(divt_text.parameter)
 
+    except:
+        return "None"
 
 
 if __name__ == "__main__":
