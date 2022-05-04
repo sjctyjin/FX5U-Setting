@@ -39,16 +39,25 @@ parameter = []
 """開啟json檔 將資料輸入列表中"""
 with open('output.json', 'r') as f:
     data = json.load(f)
-
+print(data)
 """將IP資料從data中取出"""
 plcc = 0
 for ip in range(4):
     # print(ip)
     if data[f'PLC{ip}'][0]['IP_address'] != 'undefined':
-        cs = [(f"{data[f'PLC{ip}'][0]['IP_address']}"),1025]
-        PLC.append(cs)
-        parameter.append({})#在字串中建立空dict
-        plcc += 1
+        print(data[f'PLC{ip}'][0]['IP_address'])
+        if (len(data[f'PLC{ip}'][0]['IP_address'].split(':')) > 1):
+            cs = [(f"{data[f'PLC{ip}'][0]['IP_address'].split(':')[0]}"),
+                  int(data[f'PLC{ip}'][0]['IP_address'].split(':')[1])]
+            PLC.append(cs)
+            parameter.append({})  # 在字串中建立空dict
+            plcc += 1
+            print('here')
+        else:
+            cs = [(f"{data[f'PLC{ip}'][0]['IP_address'].split(':')[0]}"), 1025]
+            PLC.append(cs)
+            parameter.append({})  # 在字串中建立空dict
+            plcc += 1
         # print(data[f'PLC{(ip+1)}'][0]['IP_address'])
 # print(int(data[f'PLC{0}'][0]['single_num']))
 # print(struct.pack('h',99)[0])
@@ -219,9 +228,10 @@ def ReadPLC(i):
     global  check_no1
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # TCP
     # sock = socket.socket(socket.AF_INET, SOCK_STREAM)      #UDP
-    sock.settimeout(0.5)
+    sock.settimeout(2.5)
     TT = ""
     try:
+        print(tuple(PLC[i][0:2]))
         sock.connect(tuple(PLC[i][0:2]))
         sock.sendall(bytes(PLC[i][2]))  # Send TO PLC
         data = sock.recv(1024)[11:]  # Receive FROM PLC
@@ -254,7 +264,7 @@ def ReadPLC(i):
                     parameter[i][li][1] = dbw
                     dbcount+=1
                 f+=1
-            # print(parameter[i])
+            print(parameter[i])
 
         # for z in range(PLC[i][2][15]):
         #     print(struct.unpack('H', data[0+(i*2):2+(i*2)])[0])
@@ -386,5 +396,5 @@ def Main():
             time.sleep(0.5)
 
 #
-# if __name__ == "__main__":
-#     Main()
+if __name__ == "__main__":
+    Main()

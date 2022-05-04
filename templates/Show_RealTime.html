@@ -10,7 +10,7 @@
 
     <script>
         function redd(){
-            $.get("http://"+local_ip+":5000/RealTime", function (data) {
+            $.get("https://lazyjimapp.herokuapp.com/RealTime", function (data) {
                 for(var i =0;i<4;i++){
                     var divs_sin = document.getElementsByClassName('plc_area_1')[i].childNodes[16];
                     var divs_dou = document.getElementsByClassName('plc_area_1')[i].childNodes[20];
@@ -40,7 +40,7 @@
       $(document).ready(function(){
           setInterval(redd,1000);
         // redd();
-        $.get("http://"+local_ip+":5000/FX5U_SQL", function (data) {
+        $.get("https://lazyjimapp.herokuapp.com/FX5U_SQL", function (data) {
             if(data != 'None'){
                 if(data[0].PLC1[0].IP_address != "undefined"){
                     class_div2 = 1;

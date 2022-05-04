@@ -30,26 +30,26 @@
                 本專題運用機械手臂、感測器(顏色、視覺、Linkit7697)、可程式控制器(PLC)、輸送帶以及無人車來模擬工廠的生產線，並建構具工業4.0規範之小型自動化產線。
                 <br />
                 <br />
-                <img src="CPS_img/CPS_flow.png" style="position:relative;width:60%;height:auto;left:20%" />
+                <img src="static/CPS_flow.png" style="position:relative;width:60%;height:auto;left:20%" />
                 <br />
                 <br />
                 本專題先透過Visual Components軟體做初步設施規劃，確認各物件位置後，再架設實體物件，將機械手臂、輸送帶及無人車做整合，先藉由系統模擬設施規劃，以降低實際架設所消耗之人力及搬運成本。
                 <br>
                 <br>
-                <img src="CPS_img/CPS_flow2.png" style="position:relative;width:80%;height:auto;left:10%" />
+                <img src="static/CPS_flow2.png" style="position:relative;width:80%;height:auto;left:10%" />
                 <br>
                 <br>
                 專題系統模擬軟體架設完成後建立之硬體系統流程架設藉由M1機械手臂將貨品(方塊)由供料塔先送上輸送帶，後通過第二隻手臂進行顏色辨識
                 若貨品顏色為紅色，定義為成品及送上右側輸送帶，再由第三隻手臂送上無人車。
                 <br>
                 <br>
-                <img src="CPS_img/CPS_flow3.png" style="position:relative;width:60%;height:auto;left:20%" />
+                <img src="static/CPS_flow3.png" style="position:relative;width:60%;height:auto;left:20%" />
                 <br />
                 <br />
                 若貨品顏色為非紅色，則判定為半成品，即送往左側輸送帶集中放置。
                 <br />
                 <br />
-                <img src="CPS_img/CPS_flow4.png" style="position:relative;width:80%;height:auto;left:10%" />
+                <img src="static/CPS_flow4.png" style="position:relative;width:80%;height:auto;left:10%" />
                 <br />
                 <br />
                 本專題應用之機械手臂透過手臂套裝軟體設定物件座標以抓取物件，由手臂附加的氣泵套件吸取本專題之物件。輸送帶套組包含紅外線及顏色感應器，將其串接手臂I/O，
@@ -65,13 +65,13 @@
                 2.	物件分類標示     <br />
                 3.	即時物件數量     <br />
                 4.	更新時間     <br />
-                <img src="CPS_img/CPS_flow5.png" style="position:relative;width:50%;height:auto;left:25%" />
+                <img src="static/CPS_flow5.png" style="position:relative;width:50%;height:auto;left:25%" />
                 <br />
                 <br />
                 當物件方塊經過超音波感測器時，觸發距離遮蔽，則累積物件數量為1，再由Linkit7697透過Wifi聯網將資料上傳至本地端網頁顯示，再透過PHP網頁程式碼編纂，將本地端網頁資料接收至XAMPP資料庫當中，再由本專題CSS設計之HTML網頁將資料庫之累積計數資料呈現。
                 <br />
                 <br />
-                <img src="CPS_img/CPS_flow6.png" style="position:relative;width:80%;height:auto;left:10%" />
+                <img src="static/CPS_flow6.png" style="position:relative;width:80%;height:auto;left:10%" />
             </p>
         </div>
     </div>

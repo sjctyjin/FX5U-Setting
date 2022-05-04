@@ -4,7 +4,7 @@
 
     $(document).ready(function(){
       
-        $.get("http://"+local_ip+":5000/FX5U_SQL", function (data) {
+        $.get("https://lazyjimapp.herokuapp.com/FX5U_SQL", function (data) {
             if(data != 'None'){
                 if(data[0].PLC1[0].IP_address != "undefined"){
                     class_div2 = 1;
@@ -347,7 +347,7 @@
         $.ajax({
              
             type: 'POST',
-            url: " http://"+local_ip+":5000/FX5U_SQL" ,
+            url: " https://lazyjimapp.herokuapp.com/FX5U_SQL" ,
             contentType: "application/json;charset=UTF-8",
             data: 
                 JSON.stringify(
