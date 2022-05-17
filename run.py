@@ -46,7 +46,7 @@ def home():
     s.connect(('8.8.8.8', 80))
     ip = s.getsockname()[0]
     return render_template(f'POST_sc.html',title=ip)
-@app.route('/psa', methods=['GET'])
+@app.route('/RealTime_page', methods=['GET'])
 def psa():
     # cn = pymssql.connect(server='127.0.0.1', user='sa', password='pass', database='Image_test', charset='big5')
     # cursor = cn.cursor(as_dict=True)
@@ -121,20 +121,23 @@ def FX5U_GET():
     except:
         return "None"
 
-
-    # PLC_data_list.append(data)
-
 @app.route('/RealTime', methods=['GET'])
 def RealTime():
     try:
-        for k in range(len(divt_text.PLC)):
-            divt_text.ReadPLC(k)
-        return jsonify(divt_text.parameter)
+        PLC,paramater = divt_text.upd()
+        for k in range(len(PLC)):
+            parameter = divt_text.ReadPLC(k,PLC,paramater)
+        return jsonify(parameter)
 
     except:
-        return "None"
+        sc = traceback.format_exc()
+        return sc
+@app.route('/php_demo', methods=['GET'])
+def php_demo():
+    return render_template(f'menu.html')
 
 
 if __name__ == "__main__":
 
     app.run(host='0.0.0.0',port=5000,debug=True)
+    # app.run()
