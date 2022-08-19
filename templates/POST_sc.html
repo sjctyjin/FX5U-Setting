@@ -7,6 +7,16 @@
     <script src="static/bootstrap.min.js"></script>
     <link href="static/bootstrap.css" rel="stylesheet">
     <link href="static/bootstrap.min.css" rel="stylesheet">
+	<script>
+    $(document).ready(function(){
+		$("#menu_bar").load("php_demo");
+	
+	});
+    </script>
+	<div id="menu_bar" style="position:relative">
+
+
+	</div>
     <style>
         html,body{
             padding: 0px;
@@ -112,7 +122,10 @@
 
 </head>
 <body>
-
+	
+		<br/>
+	<br/>
+	<br/>
     <div class="row">
         <div class="col-md-5 col-md-offset-1 col-xs-12 plc_area_1"  id="pl1" style="display:inline;">
             PLC位址 : <input id="plc_address" name='plc_address' placeholder="192.168.3.250"  style="width: 50%;" />

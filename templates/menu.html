@@ -1,0 +1,96 @@
+﻿<html>
+<head>
+  <title>Bootstrap Navigation Bar</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  	<script src="static/jquery-3.4.1.min.js"></script>
+    
+  <style>
+       body{ 
+           <!-- padding: 70px; -->
+           position:relative;
+       }
+    </style>
+	<script>
+	$(document).ready(function(){
+	var check = 0;
+	<!-- $(".collapse").hide(); -->
+		<!-- document.getElementById('push_button').addEventListener('click',function(){alert('123')}); -->
+	document.querySelector("button").addEventListener('click',function(){
+		if(check == 1){
+		    document.querySelector('.collapse').className = "navbar-collapse collapse in";
+			$(".collapse").slideUp();
+			check = 0;
+		}else{
+			
+			$(".collapse").slideDown();
+			check = 1;
+		}
+		<!-- if(document.querySelector('.collapse').className == 'navbar-collapse collapse in'){ -->
+		<!-- console.log('fuck'); -->
+		<!-- document.querySelector('.collapse').className = "collapse navbar-collapse"; -->
+			<!-- $(".collapse").slideUp(); -->
+			
+		<!-- } -->
+		<!-- else if(document.querySelector('.collapse').className == 'collapse navbar-collapse'){ -->
+		<!-- console.log('fuck'); -->
+			<!-- $(".collapse").css("display","none"); -->
+			<!-- document.querySelector('.collapse').className = "navbar-collapse collapse in"; -->
+			<!-- $(".collapse").slideDown(); -->
+		<!-- }; -->
+	});
+		
+		document.querySelector("ul").addEventListener('click',function(){
+		
+		    <!-- document.querySelector('.collapse').className = "collapse navbar-collapse"; -->
+			$(".collapse").slideUp();
+			check = 1;
+		})
+		
+	
+
+	})
+	
+	<script src="static/bootstrap.min.js"></script>
+    <link href="static/bootstrap.css" rel="stylesheet">
+    <link href="static/bootstrap.min.css" rel="stylesheet">
+</head>
+<body  data-target="#navbar-spy" data-spy="scroll" >
+<div>
+    <nav class="nav navbar-default navbar-fixed-top" id="navbar-spy">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" id="push_button"  data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span> 
+                </button>
+                <a class="navbar-brand" href="#">奧特益-FX5U連線設定</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+			
+                <ul class="nav navbar-nav">
+					
+                    <li><a  href="/" onclick="trans(this)">PLC設定頁面</a></li>
+                    <li><a  href="RealTime_page" onclick="trans(this)">PLC即時值</a></li>
+                     <li><a  href="screen" onclick="trans(this)">Winbox設定頁面</a></li>
+ 
+                </ul>
+				
+            </div>
+        </div>
+    </nav>    
+    <!-- <div style="font-size:36px"> -->
+        <!-- <div id="home" style="background-size: cover;background-position:center;background-repeat:no-repeat;background-image:url(https://images.pexels.com/photos/547114/pexels-photo-547114.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)"> -->
+            <!-- <h1>Home</h1>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br> -->
+        <!-- </div> -->
+        <!-- <div id="menu1" style="background-size: cover;background-position:center;background-repeat:no-repeat;background-image:url(https://images.pexels.com/photos/956981/milky-way-starry-sky-night-sky-star-956981.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)"> -->
+            <!-- <h1>Page 1</h1>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br> -->
+        <!-- </div> -->
+        <!-- <div id="menu2" style="background-size: cover;background-position:center;background-repeat:no-repeat;background-image:url(https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)"> -->
+            <!-- <h1>Page 2</h1>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br>I need more content<br> -->
+        <!-- </div> -->
+    <!-- </div> -->
+</div>
+</body>
+</html>

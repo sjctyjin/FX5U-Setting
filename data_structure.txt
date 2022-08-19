@@ -1,10 +1,7 @@
-{
-    "PLC0": [
-        {
-            "IP_address": "192.168.3.250",
+IP_address": "192.168.3.250",
             "single_num": "6",
             "single_address": [
-                "0:R",
+                "495:D",
                 "496:D",
                 "497:D",
                 "498:D",
@@ -28,21 +25,17 @@
                 "374:D:I",
                 "378:D:I"
             ]
-        }
-    ],
-    "PLC1": [
-        {
-            "IP_address": "undefined"
-        }
-    ],
-    "PLC2": [
-        {
-            "IP_address": "undefined"
-        }
-    ],
-    "PLC3": [
-        {
-            "IP_address": "undefined"
-        }
-    ]
-}
+
+IP_address  	: PLC - IP位址
+
+single_num 	: Word 數量
+
+single_address  : Word位置 (有 M , D , X)三種暫存器位址。
+
+double_num	: Double Word 數量
+
+double_address  : Double Word位置 (有 M , D , X)三種暫存器位址。(I : 32bit 雙精度正整數 。 f : 32bit 雙精度浮點數)。
+
+
+
+
