@@ -99,7 +99,7 @@ def video_feedb():
     print("實際大小", computer_FX, computer_FY)
     fullX = ""
     fullY = ""
-    data_res = request.get_json()
+    data_res = request.get_json(silent=True)
     # print(data_res)
     if data_res != None:
         key_press = data_res['PLC0'][0]['Key_press']
