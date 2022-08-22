@@ -139,9 +139,25 @@ var key_keep = "";
 	})
 
 }
-	
+	function touchSatrtFunc(evt) {
+    try {
+        //evt.preventDefault(); //阻止觸控時瀏覽器的縮放、滾動條滾動等
+ 
+        var touch = evt.touches[0]; //獲取第一個觸點
+        var x = Number(touch.pageX); //頁面觸點X座標
+        var y = Number(touch.pageY); //頁面觸點Y座標
+        //記錄觸點初始位置
+        startX = x;
+        startY = y;
+ 
+ 
+    } catch (e) {
+        alert('touchSatrtFunc：' + e.message);
+    }
+}
 	
 	function dkv(){
+	
 		$("#gle").click(function(e){
 			fx = document.getElementById("gle").width;
 			fy = document.getElementById("gle").height;

@@ -107,11 +107,11 @@ def video_feedb():
         fullY = data_res['PLC0'][0]['full_Y']
         mouse_X = data_res['PLC0'][0]['mouse_X']
         mouse_Y = data_res['PLC0'][0]['mouse_Y']
-        # print(data_res['PLC0'][0]['Key_press'])
-        # print(data_res['PLC0'][0]['full_X'])
-        # print(data_res['PLC0'][0]['full_Y'])
-        # print(data_res['PLC0'][0]['mouse_X'])
-        # print(data_res['PLC0'][0]['mouse_Y'])
+        print(data_res['PLC0'][0]['Key_press'])
+        print(data_res['PLC0'][0]['full_X'])
+        print(data_res['PLC0'][0]['full_Y'])
+        print(data_res['PLC0'][0]['mouse_X'])
+        print(data_res['PLC0'][0]['mouse_Y'])
     if fullX != "":
         width_S = computer_FX / int(fullX)
         height_S = computer_FY / int(fullY)
@@ -119,8 +119,17 @@ def video_feedb():
         act_Y = int(mouse_Y) * height_S
         print(int(round(act_Y, 0)), int(round(act_X, 0)))
     print("網頁大小", fullX, fullY)
-    print(pyautogui.position().x)
-    print(pyautogui.position().y)
+    print("位置大小", int(round(act_Y, 0)), int(round(act_X, 0)))
+    mx = int(round(act_Y, 0))
+    my = int(round(act_X, 0))
+
+    if mx < computer_FY and my < computer_FX:
+        pyautogui.moveTo(my,mx)
+        # pyautogui.leftClick(my,mx)
+        # pyautogui.leftClick(my,mx)
+        print(pyautogui.position().x)
+        print(pyautogui.position().y)
+
     # time.sleep(2)
     # pyautogui.moveTo(int(round(act_Y, 0),int(round(act_X, 0))))
     return render_template('test.html')
