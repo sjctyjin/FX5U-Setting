@@ -430,9 +430,16 @@
         select_val = document.createElement('option');
         select_val.value = "X";
         select_val.text = "X";
+		select_box.add(select_val);
+		
+		select_val = document.createElement('option');
+        select_val.value = "R";
+        select_val.text = "R";
+		select_box.add(select_val);
+		
         select_box.width="20%";
 
-        select_box.add(select_val);
+        
 
         pxt.id = "Single";
         pxt.style.display = "inline";
@@ -492,10 +499,16 @@
         select_val.text = "M";
         select_box.add(select_val);
 
+
   
         select_val = document.createElement('option');
         select_val.value = "X";
         select_val.text = "X";
+        select_box.add(select_val);
+		
+		select_val = document.createElement('option');
+        select_val.value = "R";
+        select_val.text = "R";
         select_box.add(select_val);
 
         btn_delete.id = "btndelete";

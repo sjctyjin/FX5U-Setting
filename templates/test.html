@@ -1,0 +1,155 @@
+<html>
+<head>
+    <script src="static/jquery-3.4.1.min.js"></script>
+
+<script>
+	
+	
+</script>
+
+</head>
+<body onload=dkv()>  
+<img id="gle" src="/screen" style="width:100%;position:relative;" />
+<div id="testt" style="">
+
+<input type="text" id="textId">
+
+</div>
+
+</body>
+
+<script>
+
+var key_keep = "";
+	
+	function post_data(key_keep){
+		 const local_ip = window.location.hostname;
+
+	
+		$.ajax({
+
+				type: 'POST',
+				url: " http://"+local_ip+":5000/screen2" ,
+				contentType: "application/json",
+				data: 
+				JSON.stringify(
+				{      
+				"PLC0":[
+				{
+				"Key_press" : ""+key_keep+"",
+				"mouse_X":"123",
+				"mouse_Y":"123",
+				"full_X":""+fx+"",
+				"full_Y":""+fy+""
+				}
+				]
+				}
+				)
+
+				,
+				dataType: 'json',
+
+				success: function(data){
+				// console.log('ajax result:')
+				console.log(data)
+
+				//console.log(plc_num_json.filter(d =>d));
+				}
+
+			});
+	}
+	
+	function post_mouse(x,y,fx,fy){
+		 const local_ip = window.location.hostname;
+
+	
+		$.ajax({
+
+				type: 'POST',
+				url: " http://"+local_ip+":5000/screen2" ,
+				contentType: "application/json;charset=UTF-8",
+				data: 
+				JSON.stringify(
+				{      
+				"PLC0":[
+				{
+				"Key_press" : "",
+				"mouse_X":""+x+"",
+				"mouse_Y":""+y+"",
+				"full_X":""+fx+"",
+				"full_Y":""+fy+""
+				}
+				]
+				}
+				)
+
+				,
+				dataType: 'json',
+
+				success: function(data){
+				// console.log('ajax result:')
+				console.log(data)
+
+				//console.log(plc_num_json.filter(d =>d));
+				}
+
+			});
+	}
+
+	function loge(){
+	
+		switch (event.key) {
+		case "ArrowDown":
+			console.log("ArrowDown");
+		  break;
+		case "ArrowUp":
+		  console.log("ArrowUp");
+		  break;
+		case "ArrowLeft":
+		  console.log("ArrowLeft");
+		  break;
+		case "ArrowRight":
+		  console.log("ArrowRight");
+		  break;
+		default:
+		  console.log(event.key, event.keyCode);
+		  key_keep = event.key;
+		  console.log("顯示"+key_keep);
+		  post_data(key_keep);
+		  return; 
+	  
+	  }
+	  
+	  
+	  
+	}
+	
+	
+	//setInterval(function(){
+	//getMousePos();
+	//},1000);
+	
+	function getMousePos() {
+      var e = event || window.event;
+	  x = document.getElementById("gle").width;
+		y = document.getElementById("gle").height;
+		console.log(x+','+y);
+		$("#gle").mousemove(function(e){
+		console.log(e.pageX+", "+e.pageY)
+	})
+
+}
+	
+	
+	function dkv(){
+		$("#gle").click(function(e){
+			fx = document.getElementById("gle").width;
+			fy = document.getElementById("gle").height;
+			post_mouse(e.pageX,e.pageY,fx,fy);
+			console.log(e.pageX+", "+e.pageY);
+		
+	})
+		document.getElementById("textId").addEventListener("keydown", loge);
+	}
+</script>
+</html>
