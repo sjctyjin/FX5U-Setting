@@ -4,7 +4,7 @@
             "IP_address": "192.168.3.250",
             "single_num": "6",
             "single_address": [
-                "0:R",
+                "500:R",
                 "496:D",
                 "497:D",
                 "498:D",
@@ -32,7 +32,15 @@
     ],
     "PLC1": [
         {
-            "IP_address": "undefined"
+            "IP_address": "192.168.3.249",
+            "single_num": "1",
+            "single_address": [
+                "12:D"
+            ],
+            "double_num": "1",
+            "double_address": [
+                "24:D:f"
+            ]
         }
     ],
     "PLC2": [

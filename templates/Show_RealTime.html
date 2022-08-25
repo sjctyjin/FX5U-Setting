@@ -42,7 +42,9 @@
                 // console.log(data[0]['D495']);
             })
         }
-     const local_ip = "{{title}}";
+     //const local_ip = "{{title}}";
+	 const local_ip = window.location.hostname;
+
         var class_div2 = 0;
       var class_div3 = 0;
       var class_div4 = 0;
@@ -428,6 +430,101 @@
 	}
     </script>
     <style>
+	
+	 html,body{
+            padding: 0px;
+            height: 100%;
+            margin: 0px;
+            background-color: rgba(0, 0, 0, 0.4);
+            background-image:url(static/fx5u.jpg);
+            background-attachment: scroll;
+            background-repeat: no-repeat; 
+            background-blend-mode: multiply;
+            background-position:center;
+            background-size:cover;
+
+        }
+        .plc_area_1{
+            position: relative;
+            left: 0%;
+            /* width: 25%; */
+            height: 80vh;
+            overflow: scroll;
+            font-size:3vmin;
+            padding:20px;
+            background-color: rgba(255,255, 255, 0.8);
+            background-blend-mode: multiply;
+            /* background-image: url(static/add.png); */
+            /* background-size:30%;
+            background-attachment: scroll;
+            background-repeat: no-repeat;
+            background-position:center; */
+        }
+        input{
+            width: 20%;
+            font-size: 3vmin;
+        }
+        button{
+            width: 30%;
+            height: auto;
+            font-size: 3vmin;
+        }
+        select{
+            font-size: 3vmin;
+        }
+        #single_set{
+            background-color: bisque;
+            width: 100%;
+        }
+        #double_set{
+            background-color: aquamarine ;
+            width: 100%;
+        }
+
+/* ==================================================== */
+.btn-box {
+    position: relative;
+  display:block;
+    top:10px;
+    left: 20px;
+  width: 40px;
+  height: 25px;
+  border-radius:100px;
+  background-color: #ccc;
+  box-shadow: 0px 3px 0px rgba(0,0,0,.13) inset;
+}
+.text{
+    position: relative;
+    left: 35px;
+}
+#btndelete{
+    position: relative;
+    left: 50px;
+}
+.btn-box .btn {
+    position: relative;
+   
+  display:block;
+  width: 10px;
+  height: 25px;
+  border-radius:50%;
+  background-color: #fff;
+  margin-left: 0;/*動畫從ml為0開始*/
+  transition: .5s;
+  box-shadow:1px 2px 5px rgba(0,0,0,.3);
+}
+.checkbox {
+  position:absolute;
+  opacity:0;
+}
+.checkbox:checked + .btn-box {
+  background-color: #8f8;
+}
+.checkbox:checked + .btn-box .btn {
+  margin-left: 20px;
+
+}
+
         select,label,span,button{
             display: none;
         }
