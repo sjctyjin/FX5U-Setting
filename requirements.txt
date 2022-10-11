@@ -1,0 +1,9 @@
+json
+pymssql
+numpy
+flask
+flask_cors
+pyserial
+pyscreenshot
+pyautogui
+opencv-python
