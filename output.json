@@ -2,42 +2,52 @@
     "PLC0": [
         {
             "IP_address": "192.168.3.250",
-            "single_num": "6",
+            "single_num": "4",
             "single_address": [
-                "0:R",
-                "496:D",
-                "497:D",
-                "498:D",
-                "499:D",
-                "192:M"
+                "12:D",
+                "14:D",
+                "16:D",
+                "18:D"
             ],
-            "double_num": "14",
+            "double_num": "1",
             "double_address": [
-                "350:D:I",
-                "352:D:I",
-                "354:D:f",
-                "356:D:f",
-                "358:D:I",
-                "360:D:f",
-                "362:D:f",
-                "364:D:f",
-                "366:D:f",
-                "368:D:f",
-                "370:D:I",
-                "372:D:f",
-                "374:D:I",
-                "378:D:I"
+                "20:D:f"
             ]
         }
     ],
     "PLC1": [
         {
-            "IP_address": "undefined"
+            "IP_address": "192.168.3.251",
+            "single_num": "6",
+            "single_address": [
+                "12:D",
+                "14:D",
+                "16:D",
+                "18:D",
+                "20:D",
+                "22:D"
+            ],
+            "double_num": "1",
+            "double_address": [
+                "202:D:f"
+            ]
         }
     ],
     "PLC2": [
         {
-            "IP_address": "undefined"
+            "IP_address": "192.168.3.252",
+            "single_num": "4",
+            "single_address": [
+                "12:D",
+                "14:D",
+                "16:D",
+                "18:D"
+            ],
+            "double_num": "2",
+            "double_address": [
+                "203:D:f",
+                "234:D:f"
+            ]
         }
     ],
     "PLC3": [

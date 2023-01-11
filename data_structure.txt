@@ -30,7 +30,7 @@ IP_address  	: PLC - IP位址
 
 single_num 	: Word 數量
 
-single_address  : Word位置 (有 M , D , X)三種暫存器位址。
+single_address  : Word位置 (有 M , D , X, R)4種暫存器位址。
 
 double_num	: Double Word 數量
 
