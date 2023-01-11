@@ -11,9 +11,9 @@
 <body onload=dkv()>  
 <img id="gle" src="/screen" style="width:100%;position:relative;" />
 <div id="testt" style="">
-
+<div id="version" style="border:2px solid black;background-color:yellow"></div>
 <input type="text" id="textId">
-
+<p id="result"></p<
 </div>
 
 </body>
@@ -29,7 +29,7 @@ var key_keep = "";
 		$.ajax({
 
 				type: 'POST',
-				url: " http://"+local_ip+":5000/screen2" ,
+				url: " http://"+local_ip+":5000/monitor" ,
 				contentType: "application/json",
 				data: 
 				JSON.stringify(
@@ -66,7 +66,7 @@ var key_keep = "";
 		$.ajax({
 
 				type: 'POST',
-				url: " http://"+local_ip+":5000/screen2" ,
+				url: " http://"+local_ip+":5000/monitor" ,
 				contentType: "application/json;charset=UTF-8",
 				data: 
 				JSON.stringify(
@@ -139,25 +139,44 @@ var key_keep = "";
 	})
 
 }
-	function touchSatrtFunc(evt) {
-    try {
-        //evt.preventDefault(); //阻止觸控時瀏覽器的縮放、滾動條滾動等
- 
-        var touch = evt.touches[0]; //獲取第一個觸點
-        var x = Number(touch.pageX); //頁面觸點X座標
-        var y = Number(touch.pageY); //頁面觸點Y座標
-        //記錄觸點初始位置
-        startX = x;
-        startY = y;
- 
- 
-    } catch (e) {
-        alert('touchSatrtFunc：' + e.message);
-    }
-}
-	
+
+		var startX = 0, startY = 0;
+            
+            //touchstart事件
+            function touchSatrtFunc(evt) {
+                try
+                {
+                    //evt.preventDefault(); //阻止觸控時瀏覽器的縮放、滾動條滾動等
+
+                    var touch = evt.touches[0]; //獲取第一個觸點
+                    var x = Number(touch.pageX); //頁面觸點X座標
+                    var y = Number(touch.pageY); //頁面觸點Y座標
+                    //記錄觸點初始位置
+                    startX = x;
+                    startY = y;
+
+                    var text = 'TouchStart事件觸發：（' + x + ', ' + y + '）';
+                    document.getElementById("result").innerHTML = text;
+                }
+                catch (e) {
+                    alert('touchSatrtFunc：' + e.message);
+                }
+            }
+
+	function isTouchDevice() {
+                document.getElementById("version").innerHTML = navigator.appVersion;
+
+                try {
+                    document.createEvent("TouchEvent");
+                    alert("支援TouchEvent事件！");
+
+                   document.getElementById("gle").addEventListener('touchstart', touchSatrtFunc, false); //繫結事件
+                }
+                catch (e) {
+                    alert("不支援TouchEvent事件！" + e.message);
+                }
+            }
 	function dkv(){
-	
 		$("#gle").click(function(e){
 			fx = document.getElementById("gle").width;
 			fy = document.getElementById("gle").height;

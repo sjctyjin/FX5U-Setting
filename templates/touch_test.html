@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<meta charset="utf-8">
+        <title>TouchEvent測試</title>
+    </head>
+    <body>
+	<img id="gle" src="/screen" style="width:100%;position:relative;" />
+        <h2>TouchEvent測試</h2>
+        <br />
+        <div id="version" style="border:2px solid black;background-color:yellow"></div>
+        <br />
+        <br />
+		
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <div id="result" style="border:2px solid red; color:red;">未觸發事件！</div>
+        <div id="test" style="border:2px solid red">
+            <ul>
+                <li id="li1">測試條目1</li>
+                <li id="li2">測試條目2</li>
+                <li id="li3">測試條目3</li>
+                <li id="li4">測試條目4</li>
+                <li id="li5">測試條目5</li>
+                <li id="li6">測試條目6</li>
+                <li id="li7">測試條目7</li>
+                <li id="li8">測試條目8</li>
+                <li id="li9">測試條目9</li>
+                <li id="li10">測試條目10</li>
+                <li id="li11">測試條目11</li>
+                <li id="li12">測試條目12</li>
+                <li id="li13">測試條目13</li>
+                <li id="li14">測試條目14</li>
+                <li id="li15">測試條目15</li>
+                <li id="li16">測試條目16</li>
+                <li id="li17">測試條目17</li>
+                <li id="li18">測試條目18</li>
+                <li id="li19">測試條目19</li>
+                <li id="li20">測試條目20</li>
+            </ul>
+        </div>
+        
+        <script type="text/javascript">
+            //全域性變數，觸控開始位置
+            var startX = 0, startY = 0;
+            
+            //touchstart事件
+            function touchSatrtFunc(evt) {
+                try
+                {
+                    //evt.preventDefault(); //阻止觸控時瀏覽器的縮放、滾動條滾動等
+
+                    var touch = evt.touches[0]; //獲取第一個觸點
+                    var x = Number(touch.pageX); //頁面觸點X座標
+                    var y = Number(touch.pageY); //頁面觸點Y座標
+                    //記錄觸點初始位置
+                    startX = x;
+                    startY = y;
+
+                    var text = 'TouchStart事件觸發：（' + x + ', ' + y + '）';
+                    document.getElementById("result").innerHTML = text;
+                }
+                catch (e) {
+                    alert('touchSatrtFunc：' + e.message);
+                }
+            }
+
+            //touchmove事件，這個事件無法獲取座標
+            function touchMoveFunc(evt) {
+                try
+                {
+                    //evt.preventDefault(); //阻止觸控時瀏覽器的縮放、滾動條滾動等
+                    var touch = evt.touches[0]; //獲取第一個觸點
+                    var x = Number(touch.pageX); //頁面觸點X座標
+                    var y = Number(touch.pageY); //頁面觸點Y座標
+
+                    var text = 'TouchMove事件觸發：（' + x + ', ' + y + '）';
+
+                    //判斷滑動方向
+                    if (x - startX != 0) {
+                        text += '<br/>左右滑動';
+                    }
+                    if (y - startY != 0) {
+                        text += '<br/>上下滑動';
+                    }
+
+                    document.getElementById("result").innerHTML = text;
+                }
+                catch (e) {
+                    alert('touchMoveFunc：' + e.message);
+                }
+            }
+
+            //touchend事件
+            function touchEndFunc(evt) {
+                try {
+                    //evt.preventDefault(); //阻止觸控時瀏覽器的縮放、滾動條滾動等
+
+                    var text = 'TouchEnd事件觸發';
+                    document.getElementById("result").innerHTML = text;
+                }
+                catch (e) {
+                    alert('touchEndFunc：' + e.message);
+                }
+            }
+
+            //繫結事件
+            function bindEvent() {
+                document.addEventListener('touchstart', touchSatrtFunc, false);
+                document.addEventListener('touchmove', touchMoveFunc, false);
+                document.addEventListener('touchend', touchEndFunc, false);
+            }
+
+            //判斷是否支援觸控事件
+            function isTouchDevice() {
+                document.getElementById("version").innerHTML = navigator.appVersion;
+
+                try {
+                    document.createEvent("TouchEvent");
+                    alert("支援TouchEvent事件！");
+
+                    bindEvent(); //繫結事件
+                }
+                catch (e) {
+                    alert("不支援TouchEvent事件！" + e.message);
+                }
+            }
+
+            window.onload = isTouchDevice;
+    </script>
+    </body>
+</html>
