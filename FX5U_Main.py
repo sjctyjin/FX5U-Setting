@@ -167,13 +167,12 @@ def WriteSQL():
 def ConnectSQL(i):
     if i == 0:
         try:
-            return pymssql.connect(server='211.23.79.241:5603',user='JYTest',password='test1234',database='Jongyee_iTrace',timeout=2,login_timeout=2)
+            return pymssql.connect(server='127.0.0.1',user='sa',password='1234',database='test',timeout=2,login_timeout=2)
         except:
             print(traceback.format_exc())
     elif i == 1:
         try:
-            cn =  pymssql.connect(server='211.23.79.241:5603', user='JYTest', password='test1234', database='Jongyee_iTrace', timeout=2,
-                                   login_timeout=2)
+            cn =  pymssql.connect(server='127.0.0.1',user='sa',password='1234',database='test',timeout=2,login_timeout=2)
             cursor = cn.cursor(as_dict=True)
             #cursor.execute("SELECT TOP(6) * FROM MFG_MO_MASTER where MF_KEY IN ('1','2','3','4','5','6') ORDER BY MF_KEY ASC")
             cursor.execute("SELECT TOP(6) * FROM MO_PROCESS where MO_NO IN ('MO-0001','MO-0002','MO-0003','MO-0004','MO-0005','MO-0006') ORDER BY MO_NO ASC")
