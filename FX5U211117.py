@@ -397,10 +397,8 @@ def WriteSQL():
 def ConnectSQL():
     try:
         return pymssql.connect(server='192.168.0.8',user='sa',password='pass',database='dy52',timeout=2,login_timeout=2)
-        #return pymssql.connect(server='10.2.0.7', user='autowin', password='Mes_01S@109', database='dy52', timeout=1,login_timeout=1)
     except:
         print(traceback.format_exc())
-    # return pymssql.connect(server='10.2.0.7',user='autowin',password='Mes_01S@109',database='dy52',timeout=1,login_timeout=1)
 
 
 def Now():
